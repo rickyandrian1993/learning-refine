@@ -1,4 +1,5 @@
 import DealsChart from "./home/deals-chart";
+import LatestActivities from "./home/latest-activities";
 import DashboardTotalCountCard from "./home/total-count-card";
 import UpcomingEvents from "./home/upcoming-events";
 import AccordionHeaderSkeleton from "./skeleton/accordion-header";
@@ -12,6 +13,7 @@ export {
   DashboardTotalCountCard,
   DealsChart,
   KanbanColumnSkeleton,
+  LatestActivities,
   LatestActivitiesSkeleton,
   ProjectCardSkeleton,
   UpcomingEvents,
