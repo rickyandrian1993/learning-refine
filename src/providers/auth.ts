@@ -1,9 +1,14 @@
-import { AuthProvider } from "@refinedev/core"
+import type { AuthProvider } from "@refinedev/core"
+
+// import type { User } from "@/graphql/schema.types"
+
 import { API_URL, dataProvider } from "./data"
 
-// For demo purposes and to make it easier to test the app, you can use the following credentials
+/**
+ * For demo purposes and to make it easier to test the app, you can use the following credentials:
+ */
 export const authCredentials = {
-  email: "mail@mail.com",
+  email: "michael.scott@dundermifflin.com",
   password: "demodemo",
 }
 
@@ -22,17 +27,16 @@ export const authProvider: AuthProvider = {
           // pass the email to see if the user exists and if so, return the accessToken
           rawQuery: `
             mutation Login($email: String!) {
-                login(loginInput: {
-                  email: $email
-                }) {
-                  accessToken,
-                }
+              login(loginInput: {
+                email: $email
+              }) {
+                accessToken,
               }
-            `,
+            }
+          `
         }
       })
 
-      // save the accessToken in localStorage
       localStorage.setItem("access_token", data.login.accessToken)
 
       return {
@@ -51,8 +55,6 @@ export const authProvider: AuthProvider = {
       }
     }
   },
-
-  // simply remove the accessToken from localStorage for the logout
   logout: async () => {
     localStorage.removeItem("access_token")
 
@@ -61,20 +63,17 @@ export const authProvider: AuthProvider = {
       redirectTo: "/login"
     }
   },
-  
   onError: async (error) => {
     // a check to see if the error is an authentication error
     // if so, set logout to true
-    if (error.statusCode === 'UNAUTHENTICATED') {
+    if (error.statusCode === "UNAUTHENTICATED") {
       return {
         logout: true,
-        ...error
       }
     }
 
     return { error }
   },
-
   check: async () => {
     try {
       // get the indetity of the user
@@ -94,21 +93,17 @@ export const authProvider: AuthProvider = {
         }
       })
 
-      // if the user is  authenticated, redirect to the home page
-      return { 
+      return {
         authenticated: true,
         redirectTo: "/"
       }
     } catch (error) {
-      // for any other error, redirect to the login page
       return {
         authenticated: false,
         redirectTo: "/login"
-        }
+      }
     }
   },
-  
-  // get the user information
   getIdentity: async () => {
     const accessToken = localStorage.getItem("access_token")
 
@@ -126,7 +121,6 @@ export const authProvider: AuthProvider = {
             }
           : {},
         meta: {
-          // get the user information such as name, email, etc
           rawQuery: `
             query Me {
               me {
@@ -135,7 +129,7 @@ export const authProvider: AuthProvider = {
                 email,
                 phone,
                 jobTitle,
-                timezone,
+                timezone
                 avatarUrl
               }
             }
