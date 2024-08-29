@@ -2,6 +2,7 @@ import DealsChart from "./home/deals-chart";
 import LatestActivities from "./home/latest-activities";
 import DashboardTotalCountCard from "./home/total-count-card";
 import UpcomingEvents from "./home/upcoming-events";
+import SelectOptionWithAvatar from "./select-option-with-avatar";
 import AccordionHeaderSkeleton from "./skeleton/accordion-header";
 import KanbanColumnSkeleton from "./skeleton/kanban";
 import LatestActivitiesSkeleton from "./skeleton/latest-activities";
@@ -15,8 +16,7 @@ export {
   KanbanColumnSkeleton,
   LatestActivities,
   LatestActivitiesSkeleton,
-  ProjectCardSkeleton,
-  UpcomingEvents,
+  ProjectCardSkeleton, SelectOptionWithAvatar, UpcomingEvents,
   UpcomingEventsSkeleton
 };
 
